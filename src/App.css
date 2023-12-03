@@ -1,38 +1,76 @@
+/* Style for the entire App */
+html {
+  background-color: #3a3f43;
+}
+
 .App {
-  text-align: center;
+  display: flex;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* Style for the sidebar */
+.sidebar {
+  font-weight: bold;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  flex: 1;
+  background-color: #6c909c;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
+  padding: 20px;
+  overflow-y: auto; /* Add scroll if content overflows */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: transparent transparent; /* Firefox */
+
+  --mask: conic-gradient(
+      from -155deg at right,
+      #0000,
+      #000 1deg 129deg,
+      #0000 130deg
+    )
+    50%/100% 128.67px;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 8px; /* Adjust the width as needed */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.sidebar-item {
+  border: transparent;
+  border-radius: 60px 0px 0px 60px;
+  -webkit-border-radius: 60px 0px 0px 60px;
+  -moz-border-radius: 60px 0px 0px 60px;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 17px;
+  font-weight: bold;
+  font-style: oblique;
+  font-family: revert-layer;
+  margin: 10px 0;
+  padding: 10px 10px 10px 20px;
+  transition: 0.2s;
+}
+
+.sidebar-item:hover {
+  transform: scale(1.05);
+  background-image: linear-gradient(90deg, #91b8c5 0%, #6c909c 90%);
+}
+
+/* Style for the content area */
+.content {
+  flex: 3 1;
+  background-image: linear-gradient(90deg, #3a3f43 0%, #6c909c 100%);
+
+  padding: 20px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  align-items: center;
+  text-align: center;
 }
