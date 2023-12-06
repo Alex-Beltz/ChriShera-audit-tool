@@ -1,75 +1,47 @@
 import React, { useState } from "react";
 import "./styles/App.css";
-
-// Import the component files for each sidebar item
-import Summary from "./components/Summary.jsx";
-import Inventory from "./components/Inventory.jsx";
-import AccountsReceivable from "./components/AccountsReceivable.jsx";
-import Cash from "./components/Cash.jsx";
-import FoodAndBeverage from "./components/FoodandBeverage.jsx";
-import HumanResources from "./components/HumanResources.jsx";
-import Expenditures from "./components/Expenditures.jsx";
-import Revenue from "./components/Revenue.jsx";
-import Rooms from "./components/Rooms.jsx";
-import SalesAndMarketing from "./components/SalesandMarketing.jsx";
-import AssetMaintenance from "./components/AssetMaintenance.jsx";
-import Systems from "./components/Systems.jsx";
-import FinancialReporting from "./components/FinancialReporting.jsx";
+import AdminDashboard from "./AdminDashboard.js";
+import CustomerDashboard from "./CustomerDashboard.js";
 
 function App() {
-  // Define the list of items for the sidebar
-  const sidebarItems = [
-    "SUMMARY",
-    "INVENTORY",
-    "Accounts Receivable",
-    "CASH",
-    "FOOD & BEVERAGE",
-    "HUMAN RESOURCES",
-    "EXPENDITURES",
-    "REVENUE",
-    "ROOMS",
-    "SALES & MARKETING",
-    "ASSET MAINTENANCE",
-    "SYSTEMS",
-    "FINANCIAL REPORTING",
-  ];
+  const [selectedDashboard, setSelectedDashboard] = useState(null);
 
-  // State to keep track of the selected item
-  const [selectedItem, setSelectedItem] = useState(sidebarItems[0]);
+  const handleAdminClick = () => {
+    setSelectedDashboard("admin");
+  };
 
-  // Create a mapping of sidebar items to their corresponding components
-  const componentMap = {
-    SUMMARY: <Summary />,
-    INVENTORY: <Inventory />,
-    "Accounts Receivable": <AccountsReceivable />,
-    CASH: <Cash />,
-    "FOOD & BEVERAGE": <FoodAndBeverage />,
-    "HUMAN RESOURCES": <HumanResources />,
-    EXPENDITURES: <Expenditures />,
-    REVENUE: <Revenue />,
-    ROOMS: <Rooms />,
-    "SALES & MARKETING": <SalesAndMarketing />,
-    "ASSET MAINTENANCE": <AssetMaintenance />,
-    SYSTEMS: <Systems />,
-    "FINANCIAL REPORTING": <FinancialReporting />,
+  const handleCustomerClick = () => {
+    setSelectedDashboard("customer");
   };
 
   return (
-    <div className="App">
-      <div className="sidebar">
-        {sidebarItems.map((item, index) => (
-          <button
-            key={index}
-            className={`sidebar-item ${selectedItem === item ? "active" : ""}`}
-            onClick={() => setSelectedItem(item)}
-          >
-            {item}
+    <div>
+      <header className="home-header">
+        <div className="home-container">
+          <img
+            className="home-header-logo"
+            src="/your-logo.png" // Replace with the path to your logo image
+            alt="Logo"
+          />
+          <div>
+            <h1 className="home-header-text">Hotel Internal Audit</h1>
+            <p className="home-header-subtext">PT CHRISHERA CONSULTING GROUP</p>
+          </div>
+        </div>
+      </header>
+
+      {selectedDashboard === null && (
+        <div className="home-btn-container">
+          <button onClick={handleAdminClick} style={{ marginRight: "10px" }}>
+            Admin
           </button>
-        ))}
-      </div>
-      <div className="content">
-        {/* Display the selected component */}
-        {componentMap[selectedItem]}
+          <button onClick={handleCustomerClick}>Customer</button>
+        </div>
+      )}
+
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        {selectedDashboard === "admin" && <AdminDashboard />}
+        {selectedDashboard === "customer" && <CustomerDashboard />}
       </div>
     </div>
   );
